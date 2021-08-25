@@ -15,12 +15,13 @@ em=$(awk 'BEGIN { FS=","} {print $1}' row2 )
 email=${em:-"(NULL)"}
 yr=$(awk 'BEGIN { FS=","} {print $3}' row2 )
 year=${yr:-"(NULL)"}
-printf "%s\t%s\t%s\t%s\t%s\t%s\n" $eid "$name" $phone $salary $email $year >> merged.txt
+printf "%-15s\t%-15s\t%-100s\t%-15s\t%-15s\t%-15s\n" $eid "$name" $phone $salary $email $year >> merged.txt
 done < file1.txt
 sed -i 's/"/ /g' merged.txt
-column -t merged.txt >> finally
+column -t -o"        " merged.txt >> finally
 rm a
 rm row
 rm row2
 rm merged.txt
 sed -e 's/_/ /g' finally >> merged.txt
+rm finally
